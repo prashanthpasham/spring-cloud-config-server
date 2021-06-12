@@ -1,33 +1,34 @@
-
-<Configuration status="info"  monitorInterval="10">
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="debug" name="RoutingTest" monitorInterval="10">
   <Properties>
-    <Property name="filename">log.out</Property>
+    <Property name="filename">D:/Micro-Logs/log.out</Property>
   </Properties>
   <ThresholdFilter level="debug"/>
  
   <Appenders>
     <Console name="STDOUT">
-      <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss} %-5p %m%n"/>
+      <PatternLayout pattern="%d{yyyy-mm-dd hh:mm:ss}-%m%n"/>
       <ThresholdFilter level="debug"/>
     </Console>
-    <RollingFile
-    name="rollingFile"
-    fileName="D:/Micro-Logs/log.out"
-    filePattern="D:/Micro-Logs/log.%d{yyyy-MM-dd}-%i.out"
-    ignoreExceptions="false">
-    <PatternLayout>
-        <Pattern>%d{yyyy-MM-dd HH:mm:ss} %-5p %m%n</Pattern>
-    </PatternLayout>
-    <Policies>
-        <SizeBasedTriggeringPolicy size="10MB" />
-    </Policies>
-    <DefaultRolloverStrategy max="12" />
-</RollingFile>
+    <Routing name="Routing">
+      <Routes pattern="file">
+        <Route>
+          <RollingFile name="Rolling-file" fileName="${filename}"
+                       filePattern="D:/Micro-Logs/log-%d{yyyy-dd-mm}-%i.out">
+            <PatternLayout>
+              <pattern>%d{yyyy-mm-dd hh:mm:ss}-%m%n</pattern>
+            </PatternLayout>
+            <SizeBasedTriggeringPolicy size="500" />
+          </RollingFile>
+        </Route>
+        <Route ref="STDOUT" key="Audit"/>
+      </Routes>
+    </Routing>
   </Appenders>
  
   <Loggers>
     <Logger name="EventLogger" level="info" additivity="false">
-      <AppenderRef ref="rollingFile"/>
+      <AppenderRef ref="Routing"/>
     </Logger>
  
     <Root level="error">
