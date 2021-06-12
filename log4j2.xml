@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Configuration status="debug" name="RoutingTest" packages="org.apache.logging.log4j.test" monitorInterval=10>
+<Configuration status="info"  monitorInterval="10">
   <Properties>
-    <Property name="filename">D:/Micro-Logs/log.out</Property>
+    <Property name="filename">log.out</Property>
   </Properties>
   <ThresholdFilter level="debug"/>
  
