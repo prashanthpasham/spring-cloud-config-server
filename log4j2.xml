@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Configuration status="debug" name="RoutingTest" monitorInterval="10">
+<Configuration status="info" name="RoutingTest" monitorInterval="10">
   <Properties>
     <Property name="filename">D:/Micro-Logs/log.out</Property>
   </Properties>
@@ -10,28 +10,22 @@
       <PatternLayout pattern="%d{yyyy-mm-dd hh:mm:ss}-%m%n"/>
       <ThresholdFilter level="debug"/>
     </Console>
-    <Routing name="Routing">
-      <Routes pattern="file">
-        <Route>
-          <RollingFile name="Rolling-file" fileName="${filename}"
+    
+          <RollingFile name="Rolling-File" fileName="${filename}"
                        filePattern="D:/Micro-Logs/log-%d{yyyy-dd-mm}-%i.out">
             <PatternLayout>
               <pattern>%d{yyyy-mm-dd hh:mm:ss}-%m%n</pattern>
             </PatternLayout>
             <SizeBasedTriggeringPolicy size="500" />
           </RollingFile>
-        </Route>
-        <Route ref="STDOUT" key="Audit"/>
-      </Routes>
-    </Routing>
+       
   </Appenders>
  
   <Loggers>
-    <Logger name="EventLogger" level="info" additivity="false">
-      <AppenderRef ref="Routing"/>
-    </Logger>
+  
  
-    <Root level="error">
+    <Root level="info">
+      <AppenderRef ref="Rolling-File"/>
       <AppenderRef ref="STDOUT"/>
     </Root>
   </Loggers>
