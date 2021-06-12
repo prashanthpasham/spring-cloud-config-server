@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE>
 <Configuration status="info" name="RoutingTest" monitorInterval="10">
   <Properties>
     <Property name="filename">D:/Micro-Logs/log.out</Property>
