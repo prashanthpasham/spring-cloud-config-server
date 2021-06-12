@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="debug" name="RoutingTest" packages="org.apache.logging.log4j.test" monitorInterval=10>
+  <Properties>
+    <Property name="filename">D:/Micro-Logs/log.out</Property>
+  </Properties>
+  <ThresholdFilter level="debug"/>
+ 
+  <Appenders>
+    <Console name="STDOUT">
+      <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss} %-5p %m%n"/>
+      <ThresholdFilter level="debug"/>
+    </Console>
+    <RollingFile
+    name="rollingFile"
+    fileName="D:/Micro-Logs/log.out"
+    filePattern="D:/Micro-Logs/log.%d{yyyy-MM-dd}-%i.out"
+    ignoreExceptions="false">
+    <PatternLayout>
+        <Pattern>%d{yyyy-MM-dd HH:mm:ss} %-5p %m%n</Pattern>
+    </PatternLayout>
+    <Policies>
+        <SizeBasedTriggeringPolicy size="10MB" />
+    </Policies>
+    <DefaultRolloverStrategy max="12" />
+</RollingFile>
+  </Appenders>
+ 
+  <Loggers>
+    <Logger name="EventLogger" level="info" additivity="false">
+      <AppenderRef ref="rollingFile"/>
+    </Logger>
+ 
+    <Root level="error">
+      <AppenderRef ref="STDOUT"/>
+    </Root>
+  </Loggers>
+ 
+</Configuration>
